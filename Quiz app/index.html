@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Quiz App</title>
+    <!-- Link to Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to Google Fonts for the Inter font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Link to our custom stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="flex items-center justify-center min-h-screen p-4 sm:p-6 bg-gray-100 text-gray-800"
+  >
+    <div
+      id="quiz-container"
+      class="bg-white shadow-xl rounded-lg p-6 sm:p-8 w-full max-w-2xl text-center"
+    >
+      <h1 id="title" class="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">
+        Online Quiz Application
+      </h1>
+      <p id="description" class="text-gray-600 mb-8 leading-relaxed">
+        Test your knowledge with our interactive quiz! Choose the correct answer
+        for each question and receive instant feedback.
+      </p>
+
+      <div id="start-screen" class="space-y-6">
+        <button
+          id="start-button"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 shadow-md"
+        >
+          Start Quiz
+        </button>
+        <div
+          id="loading-message"
+          class="hidden text-gray-500 font-semibold animate-pulse"
+        >
+          Loading questions...
+        </div>
+      </div>
+
+      <div id="question-screen" class="hidden text-left space-y-4">
+        <div class="flex items-center justify-between mb-4">
+          <span id="question-number" class="text-sm text-gray-500 font-medium"
+            >Question 1 of 10</span
+          >
+          <span id="score-display" class="text-sm text-gray-500 font-medium"
+            >Score: 0</span
+          >
+        </div>
+        <div id="timer-bar" class="timer-bar mb-4">
+          <div id="timer-fill" class="timer-fill"></div>
+        </div>
+        <p
+          id="question-text"
+          class="text-xl sm:text-2xl font-bold mb-6 text-gray-800"
+        >
+          Question will appear here.
+        </p>
+        <div id="answer-buttons" class="grid gap-4 sm:grid-cols-2">
+          <!-- Answer buttons will be injected here by JavaScript -->
+        </div>
+        <div
+          id="feedback-message"
+          class="mt-4 text-center font-bold text-lg"
+        ></div>
+      </div>
+
+      <div id="result-screen" class="hidden">
+        <h2 id="final-score" class="text-3xl font-bold mb-4 text-gray-900">
+          You scored 5/10!
+        </h2>
+        <p id="score-comment" class="text-lg text-gray-600 mb-6"></p>
+        <button
+          id="restart-button"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 shadow-md"
+        >
+          Play Again
+        </button>
+      </div>
+    </div>
+
+    <!-- Link to our JavaScript file -->
+    <script src="script.js"></script>
+  </body>
+</html>
