@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Quiz App</title>
+    <!-- Link to Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to Google Fonts for the Inter font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Link to our custom stylesheet (Updated to use relative path for deployment fix) -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body
+    class="flex items-center justify-center min-h-screen p-4 sm:p-6 bg-gray-100 text-gray-800"
+  >
+    <!-- Quiz Container -->
+    <div
+      id="quiz-container"
+      class="bg-white shadow-xl rounded-2xl p-6 sm:p-10 w-full max-w-2xl text-center relative"
+    >
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-8 text-indigo-700">
+        The Ultimate Quiz Challenge
+      </h1>
+
+      <!-- 1. Login Screen -->
+      <div id="login-screen" class="space-y-6">
+        <p class="text-gray-600 mb-6">
+          Please log in with your Roll Number to begin the quiz selection.
+        </p>
+        <input
+          type="text"
+          id="roll-number-input"
+          placeholder="Enter Your Roll Number"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+          required
+        />
+        <p id="login-error" class="text-red-500 text-sm h-5"></p>
+        <button
+          id="login-button"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg"
+        >
+          Log In & Proceed
+        </button>
+      </div>
+
+      <!-- 2. Main Menu Screen -->
+      <div id="menu-screen" class="hidden space-y-8">
+        <p class="text-lg font-semibold text-gray-700">
+          Welcome, <span id="user-roll-display" class="text-indigo-600"></span>!
+          Select a quiz topic to start:
+        </p>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <button
+            data-quiz-type="programming"
+            class="quiz-select-button bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 rounded-xl shadow-md transition-all duration-200"
+          >
+            💻 Programming Concepts
+          </button>
+          <button
+            data-quiz-type="riddles"
+            class="quiz-select-button bg-green-500 hover:bg-green-600 text-white font-semibold py-4 rounded-xl shadow-md transition-all duration-200"
+          >
+            💡 Fun Riddles
+          </button>
+          <button
+            data-quiz-type="frontend"
+            class="quiz-select-button bg-red-500 hover:bg-red-600 text-white font-semibold py-4 rounded-xl shadow-md transition-all duration-200"
+          >
+            🌐 Frontend Development
+          </button>
+        </div>
+        <p class="text-sm text-gray-500">
+          All quizzes have 10 questions. Score is calculated upon final
+          submission.
+        </p>
+      </div>
+
+      <!-- 3. Question Screen -->
+      <div id="question-screen" class="hidden text-left space-y-6">
+        <p
+          id="current-quiz-title"
+          class="text-lg font-bold text-indigo-600 mb-4 text-center"
+        ></p>
+        <div class="flex items-center justify-between mb-4 border-b pb-3">
+          <span id="question-number" class="text-base text-gray-600 font-medium"
+            >Question 1 of 10</span
+          >
+          <span class="text-base text-gray-600 font-medium"
+            >Roll No:
+            <span class="text-indigo-500" id="current-roll-display"></span
+          ></span>
+        </div>
+
+        <p
+          id="question-text"
+          class="text-xl sm:text-2xl font-extrabold mb-6 text-gray-900"
+        >
+          Question will appear here.
+        </p>
+
+        <div id="answer-buttons" class="grid gap-4 sm:grid-cols-2">
+          <!-- Answer buttons will be injected here by JavaScript -->
+        </div>
+
+        <div
+          id="submission-message"
+          class="mt-4 text-center font-semibold text-sm text-red-500 h-5"
+        ></div>
+
+        <div class="flex justify-end pt-4">
+          <button
+            id="next-question-button"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-200 shadow-md"
+          >
+            Next Question &rarr;
+          </button>
+          <button
+            id="submit-answers-button"
+            class="hidden bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-200 shadow-md"
+          >
+            Submit Answers
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. Result Screen -->
+      <div id="result-screen" class="hidden">
+        <h2 class="text-3xl font-extrabold mb-3 text-gray-900">
+          Quiz Complete!
+        </h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Roll No:
+          <span
+            class="font-bold text-indigo-600"
+            id="final-roll-display"
+          ></span>
+        </p>
+
+        <div class="p-6 bg-indigo-50 rounded-xl mb-6 shadow-inner">
+          <p class="text-2xl font-medium text-gray-700 mb-2">
+            Your Final Score:
+          </p>
+          <h2 id="final-score" class="text-6xl font-extrabold text-indigo-700">
+            0 / 10
+          </h2>
+        </div>
+
+        <p
+          id="score-comment"
+          class="text-xl text-gray-700 font-semibold mb-8"
+        ></p>
+        <button
+          id="restart-button"
+          class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg"
+        >
+          Go Back to Menu
+        </button>
+      </div>
+    </div>
+
+    <!-- Submission Success Pop-up Modal -->
+    <div
+      id="success-modal"
+      class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50"
+    >
+      <div
+        class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl transform scale-100 transition-transform duration-300"
+      >
+        <svg
+          class="w-16 h-16 text-green-500 mx-auto animate-bounce-once"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <h3 class="text-3xl font-extrabold text-gray-900 mt-4 mb-2">
+          Submission Successful!
+        </h3>
+        <p class="text-gray-600 mb-4">Your answers have been submitted.</p>
+        <p id="modal-score" class="text-lg font-bold text-indigo-600 mb-6"></p>
+        <button
+          id="close-modal-button"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200"
+        >
+          View Final Score
+        </button>
+      </div>
+    </div>
+
+    <!-- Link to our JavaScript file (Updated to use relative path for deployment fix) -->
+    <script src="./script.js"></script>
+  </body>
+</html>
