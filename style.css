@@ -1,0 +1,105 @@
+/* Custom styles for the quiz application.
+   These override or extend the default Tailwind classes. */
+body {
+  font-family: "Inter", sans-serif;
+  /* Adding a vibrant, subtle gradient to the body */
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+#quiz-container {
+  background-color: #fff;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Style for Quiz Answer Buttons */
+#answer-buttons button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+  border: 2px solid #e5e7eb; /* Light border */
+  text-align: left;
+  /* Added font weight here for all buttons */
+  font-weight: 600;
+}
+
+#answer-buttons button:hover:not(.selected) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #a5b4fc; /* indigo-300 */
+}
+
+/* Style for SELECTED answer - FIX TO OVERRIDE TAILWIND */
+#answer-buttons button.selected {
+  /* Use !important to guarantee override of Tailwind utility classes */
+  background-color: #4f46e5 !important; /* indigo-600 */
+  color: white !important;
+  border-color: #4f46e5;
+  box-shadow: 0 6px 15px rgba(79, 70, 229, 0.4);
+  transform: scale(1.02);
+}
+
+/* Style for the bounce animation on the success checkmark */
+@keyframes bounce-once {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-once {
+  animation: bounce-once 0.5s ease-out 1;
+}
+
+/* Hide the timer bar as the quiz is now submission-based */
+#timer-bar {
+  display: none !important;
+}
+
+/* Button styles for login/menu buttons */
+.quiz-select-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.quiz-select-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Login/Next/Submit Button styling */
+#login-button,
+#next-question-button,
+#submit-answers-button,
+#restart-button,
+#close-modal-button {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
